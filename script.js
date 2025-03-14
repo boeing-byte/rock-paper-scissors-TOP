@@ -19,6 +19,37 @@ let humanScore = 0;
 let computerScore = 0;
 let roundNumber = 0;
 
+const btnRock = document.querySelector(".rock");
+const btnPaper = document.querySelector(".paper");
+const btnScissors = document.querySelector(".scissors");
+const round = document.querySelector(".round");
+const userScore = document.querySelector(".user-score");
+const compScore = document.querySelector(".comp-score");
+const roundText = document.querySelector(".round-text");
+const resultText = document.querySelector(".result-text")
+
+
+
+
+let button = document.querySelectorAll("button")
+button.forEach((btn) => btn.addEventListener("click", () => {
+
+    if (humanScore == 5 && computerScore == 5 ) {
+        alert("IT'S A TIE!");
+        } else if (computerScore == 5) {
+            alert("COMPUTER WINS");
+        } else if (humanScore == 5){
+            alert("HUMAN WINS")
+        }
+
+    let humanChoice = btn.className;
+    console.log(humanChoice)
+
+    playRound(humanChoice, getComputerChoice())
+
+})
+)
+
 
 function getComputerChoice (){
     // function to randomly choose R P or S
@@ -35,57 +66,68 @@ function getComputerChoice (){
 
 
 
-function getHumanChoice () {
-    choice = prompt("Choose rock paper or scissors");
-    //console.log(`Human Choice: ${choice}`);
-    return choice;
-}
-
-
 
 function playRound (humanChoice, computerChoice) {
     // function that takes the two choices, compares them and prints the result of the round
-    console.log(`Human choice: ${humanChoice}`)
-    console.log(`Computer choice: ${computerChoice}`)
+
+    compScore.style.backgroundColor = "white";
+    userScore.style.backgroundColor = "white";
+    roundText.textContent = `${humanChoice.toUpperCase()} v ${computerChoice.toUpperCase()}`;
     humanChoice = humanChoice.toLowerCase()
 
     if (humanChoice === computerChoice) {
-        console.log("It's a tie")
+        resultText.textContent = "It's a tie";
         humanScore += 1;
         computerScore += 1;
+        compScore.style.backgroundColor = "LightGreen";
+        userScore.style.backgroundColor = "LightGreen";
     } else if (humanChoice == "rock" && computerChoice == "scissors") {
-        console.log("Human Wins")
+        resultText.textContent = "Human Wins";
         humanScore += 1 
+        userScore.style.backgroundColor = "LightGreen";
     } else if (humanChoice == "paper" && computerChoice == "rock") {
-        console.log("Human Wins")
+        resultText.textContent = "Human Wins"
         humanScore += 1 
+        userScore.style.backgroundColor = "LightGreen";
     } else if (humanChoice == "scissors" && computerChoice == "paper") {
-        console.log("Human Wins")
+        resultText.textContent = "Human Wins"
         humanScore += 1 
+        userScore.style.backgroundColor = "LightGreen";
     } else {
-        console.log("Computer Wins")
+        resultText.textContent = "Computer Wins"
         computerScore += 1 
+        compScore.style.backgroundColor = "LightGreen";
+    }
+    roundNumber += 1;
+
+    console.log(roundNumber)
+    round.textContent = `Round: ${roundNumber}`;
+    userScore.textContent = `User: ${humanScore}`;
+    compScore.textContent = `Comp: ${computerScore}`;
+    console.log(`${humanScore} : ${computerScore}`);
+
     }
 
 
-}
+// function playGame(){
+//     // game function to play 5 rounds
+//     console.log("Let's play Rock, Paper, Scissors!!")
+//     for (let i = 1; i <= 5; i++){
+//         console.log(`ROUND ${i}`)
+//         playRound(getHumanChoice(), getComputerChoice())
+//         console.log(`Human score: ${humanScore}`)
+//         console.log(`Computer score: ${computerScore}`)
+//     }
+//     if (humanScore > computerScore) {
+//         console.log("HUMAN WINS")
+//     } else if (computerScore > humanScore) {
+//         console.log("COMPUTER WINS")
+//     } else {
+//         console.log("TIE")
+//     }
+// }   
 
-function playGame(){
-    // game function to play 5 rounds
-    console.log("Let's play Rock, Paper, Scissors!!")
-    for (let i = 1; i <= 5; i++){
-        console.log(`ROUND ${i}`)
-        playRound(getHumanChoice(), getComputerChoice())
-        console.log(`Human score: ${humanScore}`)
-        console.log(`Computer score: ${computerScore}`)
-    }
-    if (humanScore > computerScore) {
-        console.log("HUMAN WINS")
-    } else if (computerScore > humanScore) {
-        console.log("COMPUTER WINS")
-    } else {
-        console.log("TIE")
-    }
-}   
 
-playGame()
+
+
+//playGame()
